@@ -63,8 +63,6 @@
 		6F127AF7153C5D2000DA96DF = {
 			isa = PBXGroup;
 			children = (
-				6FA0FCA9153CFE37000672FF /* CoreLocation.framework */,
-				6FA0FCA7153CFE29000672FF /* MapKit.framework */,
 				6F127B0C153C5D2000DA96DF /* iOwner */,
 				6F127B05153C5D2000DA96DF /* Frameworks */,
 				6F127B03153C5D2000DA96DF /* Products */,
@@ -82,6 +80,8 @@
 		6F127B05153C5D2000DA96DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FA0FCA9153CFE37000672FF /* CoreLocation.framework */,
+				6FA0FCA7153CFE29000672FF /* MapKit.framework */,
 				6F127B06153C5D2000DA96DF /* UIKit.framework */,
 				6F127B08153C5D2000DA96DF /* Foundation.framework */,
 				6F127B0A153C5D2000DA96DF /* CoreGraphics.framework */,
@@ -97,8 +97,8 @@
 				6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */,
 				6F127B18153C5D2000DA96DF /* MainWindow.xib */,
 				6F127B1E153C5D2000DA96DF /* SecondViewController.h */,
-				6F127B1F153C5D2000DA96DF /* SecondViewController.m */,
 				6F127B24153C5D2000DA96DF /* SecondView.xib */,
+				6F127B1F153C5D2000DA96DF /* SecondViewController.m */,
 				6F127B0D153C5D2000DA96DF /* Supporting Files */,
 			);
 			path = iOwner;

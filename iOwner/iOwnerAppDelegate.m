@@ -7,7 +7,7 @@
 //
 
 #import "iOwnerAppDelegate.h"
-
+#import <CoreLocation/CoreLocation.h>
 @implementation iOwnerAppDelegate
 
 @synthesize window = _window;
@@ -15,11 +15,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self checkGPSconfig];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)checkGPSconfig{
+
+    if ([CLLocationManager locationServicesEnabled] == NO) {
+        UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled" message:@"You currently have all location services for this device disabled. If you proceed, you will be asked to confirm whether location services should be reenabled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [servicesDisabledAlert show];
+        [servicesDisabledAlert release];
+    } 
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
