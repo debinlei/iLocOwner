@@ -33,10 +33,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.locationMeasurements = [NSMutableArray array];
+    [_mkView setMapType:MKMapTypeStandard];
+    
 }
 
 - (void)viewDidUnload
 {
+    [_mkView release];
+    _mkView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -52,6 +56,7 @@
     [bestEffortAtLocation release];
     [stateString release];
     [dateFormatter release];
+    [_mkView release];
     [super dealloc];
 }
 
@@ -65,6 +70,29 @@
         [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
     }
     return dateFormatter;
+}
+
+- (void)updateMKView
+{
+//    CLLocationCoordinate2D theCoordinate;
+//    theCoordinate.latitude=40.0436;
+//    theCoordinate.longitude=116.2858;
+    MKCoordinateSpan theSpan;
+    theSpan.latitudeDelta=0.01;
+    theSpan.longitudeDelta=0.01;
+    MKCoordinateRegion theRegion;
+    theRegion.center=bestEffortAtLocation.coordinate;
+    theRegion.span=theSpan;
+    MKPointAnnotation *ann = [[MKPointAnnotation alloc] init];
+    ann.coordinate = bestEffortAtLocation.coordinate;
+//    [ann setTitle:@"天河城"];
+//    [ann setSubtitle:@"购物好去处"];
+    //触发viewForAnnotation
+    [_mkView addAnnotation:ann];
+    [_mkView setZoomEnabled:YES]; 
+    [_mkView setScrollEnabled:YES]; 
+    [_mkView setMapType:MKMapTypeStandard];
+    [_mkView setRegion:theRegion animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -121,6 +149,14 @@
         }
     }
     
+    if (bestEffortAtLocation != nil) {
+        [self updateMKView];
+        [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
+        // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+        
+    }
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -141,5 +177,19 @@
     [self.navigationItem setLeftBarButtonItem:resetItem animated:YES];;
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKPinAnnotationView *pinView = nil;
+    
+    static NSString *defaultPinID = @"com.invasivecode.pin";
+    pinView = (MKPinAnnotationView *)[_mkView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+    if ( pinView == nil ) 
+        pinView = [[[MKPinAnnotationView alloc]
+                                      initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
+    pinView.pinColor = MKPinAnnotationColorRed;
+    pinView.canShowCallout = YES;
+    pinView.animatesDrop = YES;
+    return pinView;
+}
 
 @end

@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MKMapView.h>
+#import <MapKit/MKAnnotationView.h>
+#import <MapKit/MKPinAnnotationView.h>
 
-@interface OccViewController : UIViewController<CLLocationManagerDelegate>
+@interface OccViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate,MKAnnotation>
 {
     CLLocationManager *locationManager;
     NSMutableArray *locationMeasurements;
     CLLocation *bestEffortAtLocation;
     NSDateFormatter *dateFormatter;
     NSString *stateString;    
+    IBOutlet MKMapView *_mkView;
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
