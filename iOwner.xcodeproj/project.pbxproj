@@ -14,10 +14,12 @@
 		6F127B13153C5D2000DA96DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B12153C5D2000DA96DF /* main.m */; };
 		6F127B17153C5D2000DA96DF /* iOwnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */; };
 		6F127B1A153C5D2000DA96DF /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B18153C5D2000DA96DF /* MainWindow.xib */; };
-		6F127B1D153C5D2000DA96DF /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B1C153C5D2000DA96DF /* FirstViewController.m */; };
 		6F127B20153C5D2000DA96DF /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B1F153C5D2000DA96DF /* SecondViewController.m */; };
-		6F127B23153C5D2000DA96DF /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B21153C5D2000DA96DF /* FirstView.xib */; };
 		6F127B26153C5D2000DA96DF /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B24153C5D2000DA96DF /* SecondView.xib */; };
+		6FA0FCA5153CFB9F000672FF /* OccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0FCA3153CFB9F000672FF /* OccViewController.m */; };
+		6FA0FCA6153CFB9F000672FF /* OccViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA0FCA4153CFB9F000672FF /* OccViewController.xib */; };
+		6FA0FCA8153CFE29000672FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA0FCA7153CFE29000672FF /* MapKit.framework */; };
+		6FA0FCAA153CFE37000672FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA0FCA9153CFE37000672FF /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +34,14 @@
 		6F127B15153C5D2000DA96DF /* iOwnerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOwnerAppDelegate.h; sourceTree = "<group>"; };
 		6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOwnerAppDelegate.m; sourceTree = "<group>"; };
 		6F127B19153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		6F127B1B153C5D2000DA96DF /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		6F127B1C153C5D2000DA96DF /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		6F127B1E153C5D2000DA96DF /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		6F127B1F153C5D2000DA96DF /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		6F127B22153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
 		6F127B25153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		6FA0FCA2153CFB9F000672FF /* OccViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OccViewController.h; path = TabView/OccViewController.h; sourceTree = "<group>"; };
+		6FA0FCA3153CFB9F000672FF /* OccViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OccViewController.m; path = TabView/OccViewController.m; sourceTree = "<group>"; };
+		6FA0FCA4153CFB9F000672FF /* OccViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OccViewController.xib; path = TabView/OccViewController.xib; sourceTree = "<group>"; };
+		6FA0FCA7153CFE29000672FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6FA0FCA9153CFE37000672FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FA0FCAA153CFE37000672FF /* CoreLocation.framework in Frameworks */,
+				6FA0FCA8153CFE29000672FF /* MapKit.framework in Frameworks */,
 				6F127B07153C5D2000DA96DF /* UIKit.framework in Frameworks */,
 				6F127B09153C5D2000DA96DF /* Foundation.framework in Frameworks */,
 				6F127B0B153C5D2000DA96DF /* CoreGraphics.framework in Frameworks */,
@@ -57,6 +63,8 @@
 		6F127AF7153C5D2000DA96DF = {
 			isa = PBXGroup;
 			children = (
+				6FA0FCA9153CFE37000672FF /* CoreLocation.framework */,
+				6FA0FCA7153CFE29000672FF /* MapKit.framework */,
 				6F127B0C153C5D2000DA96DF /* iOwner */,
 				6F127B05153C5D2000DA96DF /* Frameworks */,
 				6F127B03153C5D2000DA96DF /* Products */,
@@ -84,14 +92,12 @@
 		6F127B0C153C5D2000DA96DF /* iOwner */ = {
 			isa = PBXGroup;
 			children = (
+				6FA0FCA1153CF9D9000672FF /* TabView */,
 				6F127B15153C5D2000DA96DF /* iOwnerAppDelegate.h */,
 				6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */,
 				6F127B18153C5D2000DA96DF /* MainWindow.xib */,
-				6F127B1B153C5D2000DA96DF /* FirstViewController.h */,
-				6F127B1C153C5D2000DA96DF /* FirstViewController.m */,
 				6F127B1E153C5D2000DA96DF /* SecondViewController.h */,
 				6F127B1F153C5D2000DA96DF /* SecondViewController.m */,
-				6F127B21153C5D2000DA96DF /* FirstView.xib */,
 				6F127B24153C5D2000DA96DF /* SecondView.xib */,
 				6F127B0D153C5D2000DA96DF /* Supporting Files */,
 			);
@@ -107,6 +113,16 @@
 				6F127B14153C5D2000DA96DF /* iOwner-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6FA0FCA1153CF9D9000672FF /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				6FA0FCA2153CFB9F000672FF /* OccViewController.h */,
+				6FA0FCA3153CFB9F000672FF /* OccViewController.m */,
+				6FA0FCA4153CFB9F000672FF /* OccViewController.xib */,
+			);
+			name = TabView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +174,8 @@
 			files = (
 				6F127B11153C5D2000DA96DF /* InfoPlist.strings in Resources */,
 				6F127B1A153C5D2000DA96DF /* MainWindow.xib in Resources */,
-				6F127B23153C5D2000DA96DF /* FirstView.xib in Resources */,
 				6F127B26153C5D2000DA96DF /* SecondView.xib in Resources */,
+				6FA0FCA6153CFB9F000672FF /* OccViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +188,8 @@
 			files = (
 				6F127B13153C5D2000DA96DF /* main.m in Sources */,
 				6F127B17153C5D2000DA96DF /* iOwnerAppDelegate.m in Sources */,
-				6F127B1D153C5D2000DA96DF /* FirstViewController.m in Sources */,
 				6F127B20153C5D2000DA96DF /* SecondViewController.m in Sources */,
+				6FA0FCA5153CFB9F000672FF /* OccViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,14 +210,6 @@
 				6F127B19153C5D2000DA96DF /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		6F127B21153C5D2000DA96DF /* FirstView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F127B22153C5D2000DA96DF /* en */,
-			);
-			name = FirstView.xib;
 			sourceTree = "<group>";
 		};
 		6F127B24153C5D2000DA96DF /* SecondView.xib */ = {
@@ -299,6 +307,7 @@
 				6F127B2B153C5D2000DA96DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
