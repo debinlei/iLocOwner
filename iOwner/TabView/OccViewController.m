@@ -41,4 +41,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)btOccupy:(id)sender {
+}
 @end

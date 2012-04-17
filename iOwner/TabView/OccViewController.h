@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface OccViewController : UIViewController
-
+{
+    
+}
+- (IBAction)btOccupy:(id)sender;
 @end
