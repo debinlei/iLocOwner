@@ -100,6 +100,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)testHttpRequest
+{
+    
+}
+
 // get the current location
 - (IBAction)btOccupy:(id)sender {
     // Create the manager object 

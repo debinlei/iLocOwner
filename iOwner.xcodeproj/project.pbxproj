@@ -166,6 +166,7 @@
 		6FCD8BAE153EE21E00DBF40B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6FCD8BAF153EE24800DBF40B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6FCD8BB5153EE53300DBF40B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6FCD8BBC153EEE7B00DBF40B /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = Utility/constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +229,7 @@
 		6F127B0C153C5D2000DA96DF /* iOwner */ = {
 			isa = PBXGroup;
 			children = (
+				6FCD8BB7153EEDEC00DBF40B /* Utility */,
 				6FA0FCA1153CF9D9000672FF /* TabView */,
 				6F127B15153C5D2000DA96DF /* iOwnerAppDelegate.h */,
 				6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */,
@@ -423,6 +425,14 @@
 				6FCD8BA5153EE18500DBF40B /* Reachability.m */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		6FCD8BB7153EEDEC00DBF40B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				6FCD8BBC153EEE7B00DBF40B /* constants.h */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
