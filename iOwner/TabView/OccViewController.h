@@ -12,7 +12,7 @@
 #import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKPinAnnotationView.h>
 
-@interface OccViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate,MKAnnotation>
+@interface OccViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate>
 {
     CLLocationManager *locationManager;
     NSMutableArray *locationMeasurements;
@@ -20,6 +20,7 @@
     NSDateFormatter *dateFormatter;
     NSString *stateString;    
     IBOutlet MKMapView *_mkView;
+    CLLocationCoordinate2D area[4];
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;

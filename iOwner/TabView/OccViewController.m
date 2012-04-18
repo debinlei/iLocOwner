@@ -72,6 +72,24 @@
     return dateFormatter;
 }
 
+- (void)updateArea
+{
+    double size = 0.001;
+    CLLocationCoordinate2D center = bestEffortAtLocation.coordinate;
+    area[0].latitude = center.latitude - size;
+    area[0].longitude = center.longitude - size;
+
+    area[1].latitude = center.latitude - size;
+    area[1].longitude = center.longitude + size;
+
+    area[2].latitude = center.latitude + size;
+    area[2].longitude = center.longitude + size;
+    
+    area[3].latitude = center.latitude + size;
+    area[3].longitude = center.longitude - size;
+    
+}
+
 - (void)updateMKView
 {
 //    CLLocationCoordinate2D theCoordinate;
@@ -85,14 +103,42 @@
     theRegion.span=theSpan;
     MKPointAnnotation *ann = [[MKPointAnnotation alloc] init];
     ann.coordinate = bestEffortAtLocation.coordinate;
-//    [ann setTitle:@"天河城"];
-//    [ann setSubtitle:@"购物好去处"];
+    [ann setTitle:@"雷"];
+    [ann setSubtitle:@"2012年4月"];
     //触发viewForAnnotation
     [_mkView addAnnotation:ann];
+    
     [_mkView setZoomEnabled:YES]; 
     [_mkView setScrollEnabled:YES]; 
     [_mkView setMapType:MKMapTypeStandard];
     [_mkView setRegion:theRegion animated:YES];
+    
+    [self updateArea];
+    MKPolygon* mypyA = [MKPolygon polygonWithCoordinates:area count:4];
+    [_mkView addOverlay:mypyA];
+    [_mkView setRegion:theRegion animated:NO];
+
+}
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+{
+    NSLog(@"in viewForOverlay!");
+    
+    if ([overlay isKindOfClass:[MKPolygon class]])
+    {
+        
+        MKPolygonView*    aView = [[[MKPolygonView alloc] initWithPolygon:(MKPolygon*)overlay] autorelease];
+        
+        aView.fillColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        
+        aView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.7];
+        
+        aView.lineWidth = 3;
+        
+        return aView;
+        
+    }
+    return nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -186,12 +232,12 @@
 {
     MKPinAnnotationView *pinView = nil;
     
-    static NSString *defaultPinID = @"com.invasivecode.pin";
+    static NSString *defaultPinID = @"com.locowner.pin";
     pinView = (MKPinAnnotationView *)[_mkView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
     if ( pinView == nil ) 
         pinView = [[[MKPinAnnotationView alloc]
                                       initWithAnnotation:annotation reuseIdentifier:defaultPinID] autorelease];
-    pinView.pinColor = MKPinAnnotationColorRed;
+    pinView.pinColor = MKPinAnnotationColorGreen;
     pinView.canShowCallout = YES;
     pinView.animatesDrop = YES;
     return pinView;
