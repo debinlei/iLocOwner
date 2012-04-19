@@ -19,8 +19,7 @@
     [self checkGPSconfig];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-//    self.window.rootViewController = self.tabBarController;
-    self.window.rootViewController = self.mpController;
+    [self login:FALSE];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -32,6 +31,20 @@
         [servicesDisabledAlert show];
         [servicesDisabledAlert release];
     } 
+}
+
+- (void)login:(BOOL)b
+{
+    if (!b) {
+        self.window.rootViewController = self.mpController;
+    }else {
+        self.window.rootViewController = self.tabBarController;
+    }
+}
+
++(iOwnerAppDelegate*)getAppDelegate
+{
+    return (iOwnerAppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

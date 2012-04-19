@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "RegViewController.h"
+#import "LoginViewController.h"
 @interface MainViewController ()
 
 @end
@@ -52,5 +53,11 @@
 }
 
 - (IBAction)LoginClick:(id)sender {
+    LoginViewController *newViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    // ...
+    // Pass the selected object to the new view controller.  
+    [self.navigationController pushViewController:newViewController animated:YES];
+    [newViewController release];  
+    
 }
 @end

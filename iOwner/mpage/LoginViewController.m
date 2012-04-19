@@ -1,20 +1,21 @@
 //
-//  RegViewController.m
+//  LoginViewController.m
 //  iOwner
 //
 //  Created by ldb on 4/19/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "RegViewController.h"
+#import "LoginViewController.h"
 #import "ASIHTTPRequest.h"
 #import "constants.h"
+#import "iOwnerAppDelegate.h"
 
-@interface RegViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation RegViewController
+@implementation LoginViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,9 +35,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    UIBarButtonItem *done =    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(submitRegInfo)] autorelease];    
+    UIBarButtonItem *done =    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(login)] autorelease];    
     
-    self.navigationItem.rightBarButtonItem = done;     
+    self.navigationItem.rightBarButtonItem = done;      
 }
 
 - (void)viewDidUnload
@@ -46,24 +47,11 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (NSString *)rndid
+-(void)login
 {
-    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
-    CFRelease(uuidRef);
-    NSString *uuid = [NSString stringWithString:(NSString *)
-                      uuidStringRef];
-    CFRelease(uuidStringRef);
-    return uuid;
-}
-
--(void)submitRegInfo
-{
-    NSString * email = [self rndid];//@"debin.test@gmail.com";
+    NSString * email = @"debin.test@gmail.com";
     NSString * password = @"123456";
-    int value = arc4random() % 1000;
-    NSString * name = [NSString stringWithFormat:@"owner%d",value];
-    NSString * regapiurl = [NSString stringWithFormat:REST_API_REGISTER,email,password,name];
+    NSString * regapiurl = [NSString stringWithFormat:REST_API_LOGIN,email,password];
     NSURL *url = [NSURL URLWithString:regapiurl];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     //[request setShouldAttemptPersistentConnection:NO];
@@ -76,6 +64,8 @@
         
         self.navigationItem.rightBarButtonItem = nil;
         [self.navigationController popViewControllerAnimated:YES];
+        iOwnerAppDelegate * appdelegate = [iOwnerAppDelegate getAppDelegate];
+        [appdelegate login:TRUE];
     }else {
         NSLog(@"%@  %@",[error localizedDescription],[error localizedFailureReason]);
     }
@@ -96,9 +86,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     // Return the number of rows in the section.
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,7 +105,7 @@
                     cell.textLabel.text = @"电子邮件";
                     break;
                 case 1:
-                    cell.textLabel.text = @"用户名";
+                    cell.textLabel.text = @"密码";
                     break;
                 default:
                     cell.textLabel.text = @"密码";
@@ -131,6 +120,7 @@
     // Configure the cell...
     
     return cell;
+
 }
 
 /*

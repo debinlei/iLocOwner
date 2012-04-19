@@ -7,6 +7,8 @@
 //
 
 #import "OccViewController.h"
+#import "constants.h"
+#import "ASIHTTPRequest.h"
 
 @interface OccViewController ()
 
@@ -87,6 +89,7 @@
     
     area[3].latitude = center.latitude + size;
     area[3].longitude = center.longitude - size;
+    [self testHttpRequest];
     
 }
 
@@ -148,6 +151,22 @@
 
 - (void)testHttpRequest
 {
+    CLLocationCoordinate2D center = bestEffortAtLocation.coordinate;
+    int x = (int)(center.latitude * 1000000);
+    int y = (int)(center.longitude * 1000000);
+    NSString * regapiurl = [NSString stringWithFormat:REST_API_ONETAKE,x,y];
+    NSURL *url = [NSURL URLWithString:regapiurl];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *response = [request responseString];
+        int scode = [request responseStatusCode];
+        NSLog(@"%d %@",scode , response);
+
+    }else {
+        NSLog(@"%@  %@",[error localizedDescription],[error localizedFailureReason]);
+    }
     
 }
 
