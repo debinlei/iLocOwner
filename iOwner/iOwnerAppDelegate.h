@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MPageViewController;
 @interface iOwnerAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
 {
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (retain, nonatomic) IBOutlet UINavigationController *mpController;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 - (void)checkGPSconfig;

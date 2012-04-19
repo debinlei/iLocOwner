@@ -13,9 +13,13 @@
 		6F127B11153C5D2000DA96DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B0F153C5D2000DA96DF /* InfoPlist.strings */; };
 		6F127B13153C5D2000DA96DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B12153C5D2000DA96DF /* main.m */; };
 		6F127B17153C5D2000DA96DF /* iOwnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */; };
-		6F127B1A153C5D2000DA96DF /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B18153C5D2000DA96DF /* MainWindow.xib */; };
 		6F127B20153C5D2000DA96DF /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B1F153C5D2000DA96DF /* SecondViewController.m */; };
 		6F127B26153C5D2000DA96DF /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B24153C5D2000DA96DF /* SecondView.xib */; };
+		6F92E742153F97C5001CFDFD /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92E740153F97C4001CFDFD /* RegViewController.m */; };
+		6F92E743153F97C5001CFDFD /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92E741153F97C4001CFDFD /* RegViewController.xib */; };
+		6F92E74C153FAFEB001CFDFD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92E74A153FAFEB001CFDFD /* MainViewController.m */; };
+		6F92E74D153FAFEB001CFDFD /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92E74B153FAFEB001CFDFD /* MainViewController.xib */; };
+		6F92E750153FB083001CFDFD /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92E74E153FB083001CFDFD /* MainWindow.xib */; };
 		6FA0FCA5153CFB9F000672FF /* OccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0FCA3153CFB9F000672FF /* OccViewController.m */; };
 		6FA0FCA6153CFB9F000672FF /* OccViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA0FCA4153CFB9F000672FF /* OccViewController.xib */; };
 		6FA0FCA8153CFE29000672FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA0FCA7153CFE29000672FF /* MapKit.framework */; };
@@ -74,10 +78,16 @@
 		6F127B14153C5D2000DA96DF /* iOwner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOwner-Prefix.pch"; sourceTree = "<group>"; };
 		6F127B15153C5D2000DA96DF /* iOwnerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOwnerAppDelegate.h; sourceTree = "<group>"; };
 		6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOwnerAppDelegate.m; sourceTree = "<group>"; };
-		6F127B19153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		6F127B1E153C5D2000DA96DF /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		6F127B1F153C5D2000DA96DF /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		6F127B25153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		6F92E73F153F97C4001CFDFD /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
+		6F92E740153F97C4001CFDFD /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
+		6F92E741153F97C4001CFDFD /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
+		6F92E749153FAFEA001CFDFD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		6F92E74A153FAFEB001CFDFD /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		6F92E74B153FAFEB001CFDFD /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		6F92E74F153FB083001CFDFD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		6FA0FCA2153CFB9F000672FF /* OccViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OccViewController.h; path = TabView/OccViewController.h; sourceTree = "<group>"; };
 		6FA0FCA3153CFB9F000672FF /* OccViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OccViewController.m; path = TabView/OccViewController.m; sourceTree = "<group>"; };
 		6FA0FCA4153CFB9F000672FF /* OccViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OccViewController.xib; path = TabView/OccViewController.xib; sourceTree = "<group>"; };
@@ -229,11 +239,12 @@
 		6F127B0C153C5D2000DA96DF /* iOwner */ = {
 			isa = PBXGroup;
 			children = (
+				6F92E74E153FB083001CFDFD /* MainWindow.xib */,
+				6F92E735153F8CBF001CFDFD /* MPage */,
 				6FCD8BB7153EEDEC00DBF40B /* Utility */,
 				6FA0FCA1153CF9D9000672FF /* TabView */,
 				6F127B15153C5D2000DA96DF /* iOwnerAppDelegate.h */,
 				6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */,
-				6F127B18153C5D2000DA96DF /* MainWindow.xib */,
 				6F127B1E153C5D2000DA96DF /* SecondViewController.h */,
 				6F127B24153C5D2000DA96DF /* SecondView.xib */,
 				6F127B1F153C5D2000DA96DF /* SecondViewController.m */,
@@ -251,6 +262,19 @@
 				6F127B14153C5D2000DA96DF /* iOwner-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F92E735153F8CBF001CFDFD /* MPage */ = {
+			isa = PBXGroup;
+			children = (
+				6F92E73F153F97C4001CFDFD /* RegViewController.h */,
+				6F92E740153F97C4001CFDFD /* RegViewController.m */,
+				6F92E741153F97C4001CFDFD /* RegViewController.xib */,
+				6F92E749153FAFEA001CFDFD /* MainViewController.h */,
+				6F92E74A153FAFEB001CFDFD /* MainViewController.m */,
+				6F92E74B153FAFEB001CFDFD /* MainViewController.xib */,
+			);
+			path = MPage;
 			sourceTree = "<group>";
 		};
 		6FA0FCA1153CF9D9000672FF /* TabView */ = {
@@ -483,10 +507,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F127B11153C5D2000DA96DF /* InfoPlist.strings in Resources */,
-				6F127B1A153C5D2000DA96DF /* MainWindow.xib in Resources */,
 				6F127B26153C5D2000DA96DF /* SecondView.xib in Resources */,
 				6FA0FCA6153CFB9F000672FF /* OccViewController.xib in Resources */,
 				6FCD8BA6153EE18500DBF40B /* README-GHUnit in Resources */,
+				6F92E743153F97C5001CFDFD /* RegViewController.xib in Resources */,
+				6F92E74D153FAFEB001CFDFD /* MainViewController.xib in Resources */,
+				6F92E750153FB083001CFDFD /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +562,8 @@
 				6FCD8B88153EDFE700DBF40B /* CJSONScanner.m in Sources */,
 				6FCD8B89153EDFE700DBF40B /* CJSONSerializer.m in Sources */,
 				6FCD8BA7153EE18500DBF40B /* Reachability.m in Sources */,
+				6F92E742153F97C5001CFDFD /* RegViewController.m in Sources */,
+				6F92E74C153FAFEB001CFDFD /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,20 +578,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		6F127B18153C5D2000DA96DF /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F127B19153C5D2000DA96DF /* en */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
 		6F127B24153C5D2000DA96DF /* SecondView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6F127B25153C5D2000DA96DF /* en */,
 			);
 			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+		6F92E74E153FB083001CFDFD /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F92E74F153FB083001CFDFD /* en */,
+			);
+			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

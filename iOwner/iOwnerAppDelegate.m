@@ -11,6 +11,7 @@
 @implementation iOwnerAppDelegate
 
 @synthesize window = _window;
+@synthesize mpController = _mpController;
 @synthesize tabBarController = _tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,7 +19,8 @@
     [self checkGPSconfig];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
+//    self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = self.mpController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -75,6 +77,7 @@
 {
     [_window release];
     [_tabBarController release];
+    [_mpController release];
     [super dealloc];
 }
 
