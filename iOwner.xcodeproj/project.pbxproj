@@ -15,6 +15,7 @@
 		6F127B17153C5D2000DA96DF /* iOwnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B16153C5D2000DA96DF /* iOwnerAppDelegate.m */; };
 		6F127B20153C5D2000DA96DF /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F127B1F153C5D2000DA96DF /* SecondViewController.m */; };
 		6F127B26153C5D2000DA96DF /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F127B24153C5D2000DA96DF /* SecondView.xib */; };
+		6F8539E0154103F4009B7406 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F8539E2154103F4009B7406 /* Localizable.strings */; };
 		6F92E742153F97C5001CFDFD /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92E740153F97C4001CFDFD /* RegViewController.m */; };
 		6F92E743153F97C5001CFDFD /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92E741153F97C4001CFDFD /* RegViewController.xib */; };
 		6F92E74C153FAFEB001CFDFD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92E74A153FAFEB001CFDFD /* MainViewController.m */; };
@@ -83,6 +84,8 @@
 		6F127B1E153C5D2000DA96DF /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		6F127B1F153C5D2000DA96DF /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		6F127B25153C5D2000DA96DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		6F8539E1154103F4009B7406 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F8539E315410410009B7406 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F92E73F153F97C4001CFDFD /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		6F92E740153F97C4001CFDFD /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		6F92E741153F97C4001CFDFD /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
@@ -265,6 +268,7 @@
 				6F127B0F153C5D2000DA96DF /* InfoPlist.strings */,
 				6F127B12153C5D2000DA96DF /* main.m */,
 				6F127B14153C5D2000DA96DF /* iOwner-Prefix.pch */,
+				6F8539E2154103F4009B7406 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -498,6 +502,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 6F127AF7153C5D2000DA96DF;
 			productRefGroup = 6F127B03153C5D2000DA96DF /* Products */;
@@ -522,6 +527,7 @@
 				6F92E74D153FAFEB001CFDFD /* MainViewController.xib in Resources */,
 				6F92E750153FB083001CFDFD /* MainWindow.xib in Resources */,
 				6F92E75E153FE410001CFDFD /* LoginViewController.xib in Resources */,
+				6F8539E0154103F4009B7406 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +600,15 @@
 				6F127B25153C5D2000DA96DF /* en */,
 			);
 			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+		6F8539E2154103F4009B7406 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F8539E1154103F4009B7406 /* en */,
+				6F8539E315410410009B7406 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		6F92E74E153FB083001CFDFD /* MainWindow.xib */ = {

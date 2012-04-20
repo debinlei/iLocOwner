@@ -113,13 +113,16 @@
         case 0:
             switch ([indexPath indexAtPosition:1]) {
                 case 0:
-                    cell.textLabel.text = @"电子邮件";
+                    cell.textLabel.text = NSLocalizedString(@"email", nil);
                     break;
                 case 1:
-                    cell.textLabel.text = @"用户名";
+                    cell.textLabel.text = NSLocalizedString(@"uname", nil);
+                    break;
+                case 2:
+                    cell.textLabel.text = NSLocalizedString(@"pwd", nil);
                     break;
                 default:
-                    cell.textLabel.text = @"密码";
+                    cell.textLabel.text = CellIdentifier;
                     break;
             }
             break;

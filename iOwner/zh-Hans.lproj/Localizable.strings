@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  iOwner
+
+  Created by ldb on 4/20/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+"email" = "电子邮件";
+
+"uname" = "用户名";
+
+"pwd" = "密码"; 
