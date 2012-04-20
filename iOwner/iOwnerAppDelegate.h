@@ -24,4 +24,5 @@
 //LOGIN : b = TRUE 
 //LOGOUT : b = FALSE
 - (void)login:(BOOL)b;
+- (void)alert:(NSString*)title message:(NSString*)message;
 @end
