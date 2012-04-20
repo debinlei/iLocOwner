@@ -48,6 +48,9 @@ extern NSString *WEIBO_FORM_BOUNDARY;
                oAuth:(OAuth *)_oAuth;
 - (void)cancel;
 
+- (void)syncGet:(NSString *)relativeUrl 
+         params:(NSMutableDictionary *)params;
+
 - (void) asyncGet:(NSString *)relativeUrl
           baseUrl:(NSString *)baseUrl
            params:(NSDictionary *)params;

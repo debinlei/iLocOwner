@@ -7,7 +7,7 @@
 //
 
 #import "RegViewController.h"
-#import "ASIHTTPRequest.h"
+#import "WeiboConnection.h"
 #import "constants.h"
 
 @interface RegViewController ()
@@ -59,26 +59,27 @@
 
 -(void)submitRegInfo
 {
-    NSString * email = [self rndid];//@"debin.test@gmail.com";
+    NSString * email = @"debin.test@gmail.com";
     NSString * password = @"123456";
     int value = arc4random() % 1000;
     NSString * name = [NSString stringWithFormat:@"owner%d",value];
-    NSString * regapiurl = [NSString stringWithFormat:REST_API_REGISTER,email,password,name];
-    NSURL *url = [NSURL URLWithString:regapiurl];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    //[request setShouldAttemptPersistentConnection:NO];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error) {
-        NSString *response = [request responseString];
-        int scode = [request responseStatusCode];
-        NSLog(@"%d %@",scode , response);
-        
-        self.navigationItem.rightBarButtonItem = nil;
-        [self.navigationController popViewControllerAnimated:YES];
-    }else {
-        NSLog(@"%@  %@",[error localizedDescription],[error localizedFailureReason]);
+    NSString * regapiurl = [NSString stringWithFormat:REST_API_REGISTER,email,password,name];    
+    WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
+                                                                action:@selector(processData:obj:)];
+    //    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];;    
+    [webconn syncGet:regapiurl params:nil];
+
+}
+
+- (void)processData:(WeiboConnection*)sender obj:(NSObject*)obj
+{
+    if (sender.hasError) {
+        //       [sender alert]; 
+        return;
     }
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

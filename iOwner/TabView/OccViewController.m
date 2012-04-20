@@ -8,7 +8,8 @@
 
 #import "OccViewController.h"
 #import "constants.h"
-#import "ASIHTTPRequest.h"
+#import "WeiboConnection.h"
+#import "NSDictionaryAdditions.h"
 
 @interface OccViewController ()
 
@@ -76,28 +77,34 @@
 
 - (void)updateArea
 {
-    double size = 0.001;
+ //   double size = 0.001;
     CLLocationCoordinate2D center = bestEffortAtLocation.coordinate;
-    area[0].latitude = center.latitude - size;
-    area[0].longitude = center.longitude - size;
-
-    area[1].latitude = center.latitude - size;
-    area[1].longitude = center.longitude + size;
-
-    area[2].latitude = center.latitude + size;
-    area[2].longitude = center.longitude + size;
-    
-    area[3].latitude = center.latitude + size;
-    area[3].longitude = center.longitude - size;
-    [self testHttpRequest];
-    
+//    area[0].latitude = center.latitude - size;
+//    area[0].longitude = center.longitude - size;
+//
+//    area[1].latitude = center.latitude - size;
+//    area[1].longitude = center.longitude + size;
+//
+//    area[2].latitude = center.latitude + size;
+//    area[2].longitude = center.longitude + size;
+//    
+//    area[3].latitude = center.latitude + size;
+//    area[3].longitude = center.longitude - size;
+    int x = (int)(MAP_UNIT_SERVER(center.latitude));
+    int y = (int)(MAP_UNIT_SERVER(center.longitude));
+    NSString * regapiurl = [NSString stringWithFormat:REST_API_ONETAKE,x,y];
+    WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
+                                                                action:@selector(processData:obj:)] ; 
+    [webconn asyncGet:regapiurl params:nil];   
 }
 
-- (void)updateMKView
+- (void)processData:(WeiboConnection*)sender obj:(NSObject*)obj
 {
-//    CLLocationCoordinate2D theCoordinate;
-//    theCoordinate.latitude=40.0436;
-//    theCoordinate.longitude=116.2858;
+    if (sender.hasError) {
+        //       [sender alert]; 
+        return;
+    }
+    
     MKCoordinateSpan theSpan;
     theSpan.latitudeDelta=0.01;
     theSpan.longitudeDelta=0.01;
@@ -116,10 +123,49 @@
     [_mkView setMapType:MKMapTypeStandard];
     [_mkView setRegion:theRegion animated:YES];
     
-    [self updateArea];
-    MKPolygon* mypyA = [MKPolygon polygonWithCoordinates:area count:4];
-    [_mkView addOverlay:mypyA];
+    NSDictionary *dic = (NSDictionary*)obj;
+	if (dic) {
+        NSArray* ayydomain = [dic objectForKey:JSON_DOMAIN_NEW];
+        for (int i=0; i<[ayydomain count]; i++) {
+            NSDictionary * dicdomain = [ayydomain objectAtIndex:i];
+            int left = [dicdomain getIntValueForKey:JSON_DOMAIN_DATA_LEFT defaultValue:0];
+            int top = [dicdomain getIntValueForKey:JSON_DOMAIN_DATA_TOP defaultValue:0];
+            int right = [dicdomain getIntValueForKey:JSON_DOMAIN_DATA_RIGHT defaultValue:0];
+            int bottom = [dicdomain getIntValueForKey:JSON_DOMAIN_DATA_BOTTOM defaultValue:0];
+            double l = MAP_UNIT_LOCAL(left);
+            double t = MAP_UNIT_LOCAL(top);
+            double r = MAP_UNIT_LOCAL(right);
+            double b = MAP_UNIT_LOCAL(bottom);
+            
+            area[0].latitude = l;
+            area[0].longitude = t;
+            
+            area[1].latitude = r;
+            area[1].longitude = t;
+            
+            area[2].latitude = r;
+            area[2].longitude = b;
+            
+            area[3].latitude = l;
+            area[3].longitude = b;
+            
+            MKPolygon* mypyA = [MKPolygon polygonWithCoordinates:area count:4];
+            [_mkView addOverlay:mypyA];
+                        
+        }
+	}
     [_mkView setRegion:theRegion animated:NO];
+}
+
+- (void)updateMKView
+{
+//    CLLocationCoordinate2D theCoordinate;
+//    theCoordinate.latitude=40.0436;
+//    theCoordinate.longitude=116.2858;
+
+    
+    [self updateArea];
+
 
 }
 
@@ -149,26 +195,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)testHttpRequest
-{
-    CLLocationCoordinate2D center = bestEffortAtLocation.coordinate;
-    int x = (int)(center.latitude * 1000000);
-    int y = (int)(center.longitude * 1000000);
-    NSString * regapiurl = [NSString stringWithFormat:REST_API_ONETAKE,x,y];
-    NSURL *url = [NSURL URLWithString:regapiurl];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error) {
-        NSString *response = [request responseString];
-        int scode = [request responseStatusCode];
-        NSLog(@"%d %@",scode , response);
 
-    }else {
-        NSLog(@"%@  %@",[error localizedDescription],[error localizedFailureReason]);
-    }
-    
-}
 
 // get the current location
 - (IBAction)btOccupy:(id)sender {

@@ -8,6 +8,7 @@
 
 #import "WeiboConnection.h"
 #import "StringUtil.h"
+#import "constants.h"
 
 @implementation WeiboConnection
 @synthesize statusCode;
@@ -40,7 +41,7 @@
 		delegate = aDelegate;
 		action = anAction;
 		statusCode = 0;
-		needAuth = YES;
+		needAuth = FALSE;
 		oAuth = nil;//[[WeiboEngine currentAccount].oAuth retain];
 	}
 	return self;
@@ -58,13 +59,12 @@
 }
 
 - (NSString *)baseUrl {
-	return @"http://api.t.sina.com.cn/";
+	return REST_SERVER;
 }
 
 
 - (void)syncGet:(NSString *)relativeUrl 
-queryParameters:(NSMutableDictionary *)params 
-processResponseDataAction:(SEL)processAction {
+         params:(NSMutableDictionary *)params  {
     NSString *baseUrl = [self baseUrl];
     NSString *url = baseUrl ? [NSString stringWithFormat:@"%@%@", baseUrl, relativeUrl] : relativeUrl;
 	[self cancel];
@@ -81,8 +81,10 @@ processResponseDataAction:(SEL)processAction {
         NSLog(@"responst text: %@", [request responseString]);
         NSObject *obj = [[CJSONDeserializer deserializer] deserialize:responseData
                                                                 error:nil];
-        [self performSelector:processAction withObject:obj withObject:nil]; 
-    }
+        if (delegate) {
+            [delegate performSelector:action withObject:self withObject:obj];
+        }
+        }
     else {
         NSLog(@"error message: %@", [error description]);
         // error;

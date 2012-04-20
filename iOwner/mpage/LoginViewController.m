@@ -10,6 +10,7 @@
 #import "ASIHTTPRequest.h"
 #import "constants.h"
 #import "iOwnerAppDelegate.h"
+#import "WeiboConnection.h"
 
 @interface LoginViewController ()
 
@@ -51,24 +52,25 @@
 {
     NSString * email = @"debin.test@gmail.com";
     NSString * password = @"123456";
-    NSString * regapiurl = [NSString stringWithFormat:REST_API_LOGIN,email,password];
-    NSURL *url = [NSURL URLWithString:regapiurl];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    //[request setShouldAttemptPersistentConnection:NO];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error) {
-        NSString *response = [request responseString];
-        int scode = [request responseStatusCode];
-        NSLog(@"%d %@",scode , response);
-        
-        self.navigationItem.rightBarButtonItem = nil;
-        [self.navigationController popViewControllerAnimated:YES];
-        iOwnerAppDelegate * appdelegate = [iOwnerAppDelegate getAppDelegate];
-        [appdelegate login:TRUE];
-    }else {
-        NSLog(@"%@  %@",[error localizedDescription],[error localizedFailureReason]);
+    NSString * regapiurl = [NSString stringWithFormat:REST_API_LOGIN,email,password]; 
+    WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
+                                                            action:@selector(processData:obj:)];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];;    
+    [webconn syncGet:regapiurl params:nil];
+}
+
+- (void)processData:(WeiboConnection*)sender obj:(NSObject*)obj
+{
+    if (sender.hasError) {
+ //       [sender alert]; 
+        return;
     }
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+    iOwnerAppDelegate * appdelegate = [iOwnerAppDelegate getAppDelegate];
+    [appdelegate login:TRUE];
+   
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
