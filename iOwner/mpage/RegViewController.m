@@ -67,7 +67,7 @@
     return uuid;
 }
 
--(void)submitRegInfoa
+-(void)submitRegInfo
 {
     NSString * email = _email;//@"debin.test@gmail.com";
     NSString * password = _password;//@"123456";
