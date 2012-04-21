@@ -184,13 +184,13 @@
 {
     switch (textField.tag) {
         case 0:
-            _email = [textField text];
+            _email = [[textField text] retain];
             break;
         case 1:
-            _username = [textField text];
+            _username = [[textField text] retain];
             break;
         case 2:
-            _password = [textField text];
+            _password = [[textField text] retain];
             break;
             
         default:
