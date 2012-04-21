@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegViewController : UITableViewController
+@interface RegViewController : UITableViewController<UITextFieldDelegate>{
+    NSString * _email;
+    NSString * _username;
+    NSString * _password;
+}
+@property (nonatomic, retain) UITextField *currentTextField;
 
 @end

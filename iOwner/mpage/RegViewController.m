@@ -16,6 +16,8 @@
 
 @implementation RegViewController
 
+@synthesize currentTextField = _currentTextField;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -46,6 +48,14 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)dealloc {
+    [_currentTextField release];
+    [_email release];
+    [_username release];
+    [_password release];
+    [super dealloc];
+}
+
 - (NSString *)rndid
 {
     CFUUIDRef uuidRef = CFUUIDCreate(NULL);
@@ -57,12 +67,12 @@
     return uuid;
 }
 
--(void)submitRegInfo
+-(void)submitRegInfoa
 {
-    NSString * email = @"debin.test@gmail.com";
-    NSString * password = @"123456";
-    int value = arc4random() % 1000;
-    NSString * name = [NSString stringWithFormat:@"owner%d",value];
+    NSString * email = _email;//@"debin.test@gmail.com";
+    NSString * password = _password;//@"123456";
+//    int value = arc4random() % 1000;
+    NSString * name = _username;//[NSString stringWithFormat:@"owner%d",value];
     NSString * regapiurl = [NSString stringWithFormat:REST_API_REGISTER,email,password,name];    
     WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
                                                                 action:@selector(processData:obj:)];
@@ -109,6 +119,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     switch ([indexPath indexAtPosition:0]) {
         case 0:
@@ -122,6 +133,12 @@
                 case 2:
                     cell.textLabel.text = NSLocalizedString(@"pwd", nil);
                     break;
+//                case 3:
+//                    cell.textLabel.text = NSLocalizedString(@"pwd", nil);
+//                    break;
+//                case 4:
+//                    cell.textLabel.text = NSLocalizedString(@"pwd", nil);
+//                    break;    
                 default:
                     cell.textLabel.text = CellIdentifier;
                     break;
@@ -132,10 +149,73 @@
             break;
     }
     
+    NSInteger row = [indexPath row];
+    CGRect textFieldRect = CGRectMake(0.0, 0.0f, 200.0f, 32.0f);
+    UITextField *theTextField = [[UITextField alloc] initWithFrame:textFieldRect];
+    theTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    theTextField.returnKeyType = UIReturnKeyDone;
+    if (row == 2) {
+        theTextField.secureTextEntry = YES;
+    }
+    theTextField.clearButtonMode = YES;
+    theTextField.tag = row;
+    theTextField.delegate = self;
+    
+    [theTextField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+    [theTextField addTarget:self action:@selector(textFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit]; 
+//    [theTextField addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin]; 
+    switch (row) {
+        case 0:
+            theTextField.placeholder = @"example@example.com";
+            break;
+        default:
+            break;
+    }
+    
+    cell.accessoryView = theTextField; 
+    [theTextField release];
+    
     // Configure the cell...
     
     return cell;
 }
+
+- (void)textFieldWithText:(UITextField *)textField
+{
+    switch (textField.tag) {
+        case 0:
+            _email = [textField text];
+            break;
+        case 1:
+            _username = [textField text];
+            break;
+        case 2:
+            _password = [textField text];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)textFieldDoneEditing:(id)sender
+{
+    self.currentTextField = (UITextField *)sender;
+    [self.currentTextField resignFirstResponder];
+    [sender resignFirstResponder];
+    [self.tableView scrollRectToVisible:self.currentTextField.frame animated:YES];
+}
+
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    self.currentTextField = textField;
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *) [self.tableView viewWithTag:self.currentTextField.tag]];
+//    //这里要看textField 是直接加到cell 上的还是加的 cell.contentView上的
+//    //直接加到cell 上
+//    UITableViewCell *cell = (UITableViewCell *) [textField superview];
+//    indexPath = [self.tableView indexPathForCell:cell];
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//}
 
 /*
 // Override to support conditional editing of the table view.
