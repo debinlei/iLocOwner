@@ -12,3 +12,6 @@
 
 "pwd" = "password"; 
 
+"unameisnull" = "Username is required";
+"pwdisnull" = "Password is required";
+"emailisnull" = "EMail is required";

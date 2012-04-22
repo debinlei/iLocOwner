@@ -8,6 +8,7 @@
 
 #import "RegViewController.h"
 #import "WeiboConnection.h"
+#import "cucErrorBucket.h"
 #import "constants.h"
 
 @interface RegViewController ()
@@ -73,6 +74,21 @@
     NSString * password = _password;//@"123456";
 //    int value = arc4random() % 1000;
     NSString * name = _username;//[NSString stringWithFormat:@"owner%d",value];
+    
+    cucErrorBucket *bucket = [[cucErrorBucket alloc] init]; 
+    if(email == nil || email.length == 0)
+        [bucket addError:NSLocalizedString(@"emailisnull", nil)]; 
+    if(name == nil || name.length == 0)
+        [bucket addError:NSLocalizedString(@"unameisnull", nil)];
+    if(password == nil || password.length == 0)
+        [bucket addError:NSLocalizedString(@"pwdisnull", nil)];
+    
+    if((bucket.hasErrors)) 
+    {
+        [[iOwnerAppDelegate getAppDelegate] alert:@"Input Error" message:[bucket errorsAsString]];
+        return;
+    }
+    
     NSString * regapiurl = [NSString stringWithFormat:REST_API_REGISTER,email,password,name];    
     WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
                                                                 action:@selector(processData:obj:)];
@@ -172,7 +188,8 @@
             break;
     }
     
-    cell.accessoryView = theTextField; 
+    cell.accessoryView = theTextField;
+    cell.tag = row;
     [theTextField release];
     
     // Configure the cell...
@@ -184,12 +201,15 @@
 {
     switch (textField.tag) {
         case 0:
+            [_email release];
             _email = [[textField text] retain];
             break;
         case 1:
+            [_username release];
             _username = [[textField text] retain];
             break;
         case 2:
+            [_password release];
             _password = [[textField text] retain];
             break;
             
@@ -201,8 +221,26 @@
 -(void)textFieldDoneEditing:(id)sender
 {
     self.currentTextField = (UITextField *)sender;
-    [self.currentTextField resignFirstResponder];
-    [sender resignFirstResponder];
+    if (self.currentTextField.tag == 2) {
+        [self.currentTextField resignFirstResponder];
+        [sender resignFirstResponder];
+    }else
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *) [self.tableView viewWithTag:self.currentTextField.tag]];
+        NSUInteger row = [indexPath row];  
+        row++;  
+//        if (row >= kNumberOfEditableRows) {  
+//            row = 0;  
+//        }  
+        NSIndexPath *newPath = [NSIndexPath indexPathForRow:row inSection:0];  
+        UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:newPath];  
+        UITextField *nextField = nil;  
+        if ([nextCell.accessoryView isMemberOfClass:[UITextField class]]) {  
+                nextField = (UITextField *)nextCell.accessoryView;    
+        }  
+        [nextField becomeFirstResponder];          
+        
+    }
     [self.tableView scrollRectToVisible:self.currentTextField.frame animated:YES];
 }
 

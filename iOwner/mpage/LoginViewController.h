@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UITableViewController
+@interface LoginViewController : UITableViewController<UITextFieldDelegate>{
+    NSString * _email;
+    NSString * _username;
+    NSString * _password;
+}
+@property (nonatomic, retain) UITextField *currentTextField;
 
 @end

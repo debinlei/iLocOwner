@@ -62,6 +62,7 @@
 		6FA0FCA6153CFB9F000672FF /* OccViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA0FCA4153CFB9F000672FF /* OccViewController.xib */; };
 		6FA0FCA8153CFE29000672FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA0FCA7153CFE29000672FF /* MapKit.framework */; };
 		6FA0FCAA153CFE37000672FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA0FCA9153CFE37000672FF /* CoreLocation.framework */; };
+		6FBEBA4915443F600043E525 /* cucErrorBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEBA4815443F600043E525 /* cucErrorBucket.m */; };
 		6FCD8B57153EDFE700DBF40B /* AnimatedGif.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD8AB5153EDFE700DBF40B /* AnimatedGif.m */; };
 		6FCD8B58153EDFE700DBF40B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD8AB8153EDFE700DBF40B /* ASIAuthenticationDialog.m */; };
 		6FCD8B59153EDFE700DBF40B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD8ABB153EDFE700DBF40B /* ASIDataCompressor.m */; };
@@ -209,6 +210,8 @@
 		6FA0FCA4153CFB9F000672FF /* OccViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OccViewController.xib; path = TabView/OccViewController.xib; sourceTree = "<group>"; };
 		6FA0FCA7153CFE29000672FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6FA0FCA9153CFE37000672FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6FBEBA4715443F600043E525 /* cucErrorBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cucErrorBucket.h; sourceTree = "<group>"; };
+		6FBEBA4815443F600043E525 /* cucErrorBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cucErrorBucket.m; sourceTree = "<group>"; };
 		6FCD8AB4153EDFE700DBF40B /* AnimatedGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGif.h; sourceTree = "<group>"; };
 		6FCD8AB5153EDFE700DBF40B /* AnimatedGif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGif.m; sourceTree = "<group>"; };
 		6FCD8AB7153EDFE700DBF40B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 		6F853A1415410BC5009B7406 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6FBEBA4715443F600043E525 /* cucErrorBucket.h */,
+				6FBEBA4815443F600043E525 /* cucErrorBucket.m */,
 				6F853A3B15412662009B7406 /* Additions */,
 				6F853A2415410C83009B7406 /* Global */,
 				6F853A1515410BC5009B7406 /* CPopoverManager.h */,
@@ -844,6 +849,7 @@
 				6F853A6615412662009B7406 /* UITextViewAdditions.m in Sources */,
 				6F853A6715412662009B7406 /* UIView+Hierarchy.m in Sources */,
 				6F853A6815412662009B7406 /* UIViewAdditions.m in Sources */,
+				6FBEBA4915443F600043E525 /* cucErrorBucket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

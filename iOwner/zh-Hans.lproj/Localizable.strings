@@ -9,4 +9,9 @@
 
 "uname" = "用户名";
 
-"pwd" = "密码"; 
+"pwd" = "密码";
+
+"unameisnull" = "请输入用户名";
+"pwdisnull" = "密码为空";
+"emailisnull" = "请填写电子邮件";
+

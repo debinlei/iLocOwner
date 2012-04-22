@@ -11,12 +11,16 @@
 #import "constants.h"
 #import "iOwnerAppDelegate.h"
 #import "WeiboConnection.h"
+#import "cucErrorBucket.h"
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+
+@synthesize currentTextField = _currentTextField;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -48,10 +52,33 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)dealloc {
+    [_currentTextField release];
+    [_email release];
+    [_username release];
+    [_password release];
+    [super dealloc];
+}
+
 -(void)login
 {
-    NSString * email = @"debin.test@gmail.com";
-    NSString * password = @"123456";
+    NSString * email = _email;//@"debin.test@gmail.com";
+    NSString * password = _password;//@"123456";
+//    NSString * name = _username;
+    cucErrorBucket *bucket = [[cucErrorBucket alloc] init]; 
+    if(email == nil || email.length == 0)
+        [bucket addError:NSLocalizedString(@"emailisnull", nil)]; 
+//    if(name == nil || name.length == 0)
+//        [bucket addError:NSLocalizedString(@"unameisnull", nil)];
+    if(password == nil || password.length == 0)
+        [bucket addError:NSLocalizedString(@"pwdisnull", nil)];
+    
+    if((bucket.hasErrors)) 
+    {
+        [[iOwnerAppDelegate getAppDelegate] alert:@"Input Error" message:[bucket errorsAsString]];
+        return;
+    }
+    
     NSString * regapiurl = [NSString stringWithFormat:REST_API_LOGIN,email,password]; 
     WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
                                                             action:@selector(processData:obj:)];
@@ -99,6 +126,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     switch ([indexPath indexAtPosition:0]) {
         case 0:
@@ -110,7 +138,7 @@
                     cell.textLabel.text = NSLocalizedString(@"pwd", nil);
                     break;
                 default:
-                   cell.textLabel.text = CellIdentifier;
+                    cell.textLabel.text = CellIdentifier;
                     break;
             }
             break;
@@ -119,11 +147,87 @@
             break;
     }
     
+    NSInteger row = [indexPath row];
+    CGRect textFieldRect = CGRectMake(0.0, 0.0f, 200.0f, 32.0f);
+    UITextField *theTextField = [[UITextField alloc] initWithFrame:textFieldRect];
+    theTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    theTextField.returnKeyType = UIReturnKeyDone;
+    if (row == 1) {
+        theTextField.secureTextEntry = YES;
+    }
+    theTextField.clearButtonMode = YES;
+    theTextField.tag = row;
+    theTextField.delegate = self;
+    
+    [theTextField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+    [theTextField addTarget:self action:@selector(textFieldDoneEditing:) forControlEvents:UIControlEventEditingDidEndOnExit]; 
+    //    [theTextField addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin]; 
+    switch (row) {
+        case 0:
+//            theTextField.placeholder = @"example@example.com";
+            break;
+        default:
+            break;
+    }
+    
+    cell.accessoryView = theTextField;
+    cell.tag = row;
+    [theTextField release];
+    
     // Configure the cell...
     
     return cell;
 
+
 }
+
+- (void)textFieldWithText:(UITextField *)textField
+{
+    switch (textField.tag) {
+        case 0:
+            [_email release];
+            _email = [[textField text] retain];
+            break;
+        case 2:
+            [_username release];
+            _username = [[textField text] retain];
+            break;
+        case 1:
+            [_password release];
+            _password = [[textField text] retain];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)textFieldDoneEditing:(id)sender
+{
+    self.currentTextField = (UITextField *)sender;
+    if (self.currentTextField.tag == 1) {
+        [self.currentTextField resignFirstResponder];
+        [sender resignFirstResponder];
+    }else
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *) [self.tableView viewWithTag:self.currentTextField.tag]];
+        NSUInteger row = [indexPath row];  
+        row++;  
+        //        if (row >= kNumberOfEditableRows) {  
+        //            row = 0;  
+        //        }  
+        NSIndexPath *newPath = [NSIndexPath indexPathForRow:row inSection:0];  
+        UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:newPath];  
+        UITextField *nextField = nil;  
+        if ([nextCell.accessoryView isMemberOfClass:[UITextField class]]) {  
+            nextField = (UITextField *)nextCell.accessoryView;    
+        }  
+        [nextField becomeFirstResponder];          
+        
+    }
+    [self.tableView scrollRectToVisible:self.currentTextField.frame animated:YES];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
