@@ -10,6 +10,7 @@
 #import "constants.h"
 #import "WeiboConnection.h"
 #import "NSDictionaryAdditions.h"
+#import "CJSONSerializer.h"
 
 @interface OccViewController ()
 
@@ -21,6 +22,9 @@
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
 @synthesize stateString;
+
+@synthesize geoCoder = _geoCoder;
+@synthesize reverseGeocoder = _reverseGeocoder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,6 +64,9 @@
     [stateString release];
     [dateFormatter release];
     [_mkView release];
+    [_geoCoder release];
+    [_reverseGeocoder release];
+
     [super dealloc];
 }
 
@@ -166,7 +173,6 @@
     
     [self updateArea];
 
-
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
@@ -248,6 +254,7 @@
     
     if (bestEffortAtLocation != nil) {
         [self updateMKView];
+        [self getGeoCoderInfo];
         [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
         // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
@@ -288,5 +295,77 @@
     pinView.animatesDrop = YES;
     return pinView;
 }
+
+-(void)getGeoCoderInfo
+{
+    //解析并获取当前坐标对应得地址信息
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          @"aaa", @"locality", @"bbb", @"thoroughfare",@"ccc", @"subLocality", nil];
+    NSError *error = NULL;
+    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:dict  error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",jsonString);
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
+        [self locationAddressWithLocation:bestEffortAtLocation];
+    }else {
+        [self startedReverseGeoderWithLatitude:bestEffortAtLocation.coordinate.latitude 
+                                     longitude:bestEffortAtLocation.coordinate.longitude];
+    }    
+}
+
+#pragma mark - 获取城市名称
+
+//   iso  5.0 以下版本使用此方法
+- (void)startedReverseGeoderWithLatitude:(double)latitude longitude:(double)longitude{
+    CLLocationCoordinate2D coordinate2D;
+    coordinate2D.longitude = longitude;
+    coordinate2D.latitude = latitude;
+    MKReverseGeocoder *geoCoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate2D];
+    self.reverseGeocoder = geoCoder;
+    [geoCoder release];
+    
+    
+    self.reverseGeocoder.delegate = self;
+    [self.reverseGeocoder start];
+}
+#pragma mark -
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
+{
+    NSString *thoroughfare=placemark.thoroughfare;
+//    if (thoroughfare) {
+//        self.locationLabel.text = thoroughfare;
+//    }
+}
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    NSLog(@"获取失败");
+}
+
+//  IOS 5.0 及以上版本使用此方法
+- (void)locationAddressWithLocation:(CLLocation *)locationGps
+{
+    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+    self.geoCoder = clGeoCoder;
+    [clGeoCoder release];
+    
+    [self.geoCoder reverseGeocodeLocation:locationGps completionHandler:^(NSArray *placemarks, NSError *error) 
+     {
+         NSLog(@"error %@ placemarks count %d",error.localizedDescription,placemarks.count);
+         for (CLPlacemark *placeMark in placemarks) 
+         {
+             NSLog(@"地址：%@",placeMark.locality);
+             NSLog(@"地址：%@",placeMark.thoroughfare);
+             NSLog(@"地址：%@",placeMark.subLocality);
+             NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                   placeMark.locality, @"locality", placeMark.thoroughfare, @"thoroughfare",placeMark.subLocality, @"subLocality", nil];
+             NSError *error = NULL;
+             NSData *jsonData = [[CJSONSerializer serializer] serializeObject:dict  error:&error];
+             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+             NSLog(@"%@",jsonString);           
+         }
+     }];
+}
+
 
 @end
