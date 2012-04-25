@@ -161,7 +161,7 @@ return(theResult);
 {
 #pragma unused (outError)
 
-NSMutableData *theData = [NSMutableData dataWithLength:inString.length * 2 + 2];
+NSMutableData *theData = [NSMutableData dataWithLength:inString.length * 4 + 2];
 
 char *theOutputStart = [theData mutableBytes];
 char *OUT = theOutputStart;
