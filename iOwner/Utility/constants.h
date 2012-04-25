@@ -8,7 +8,7 @@
 
 #ifndef iOwner_constants_h
 #define iOwner_constants_h
-#define LOCALTEST
+//#define LOCALTEST
 #ifdef LOCALTEST
     #define REST_SERVER @"http://9.123.139.41:9000/"
 #else
@@ -22,6 +22,7 @@
 #define REST_API_LOGIN   @"Application/Jlogin?email=%@&password=%@"
 
 #define REST_API_ONETAKE   @"Users/JOneTake?x=%d&y=%d"
+#define REST_API_ONETAKE_PLACEMACK   @"Users/JOneTake?x=%d&y=%d&pmark=%@"
 
 #define MAP_UNIT_SERVER(n)  n*1000000
 #define MAP_UNIT_LOCAL(n)  ((double)(n))/1000000

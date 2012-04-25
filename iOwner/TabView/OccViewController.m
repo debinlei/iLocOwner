@@ -299,12 +299,13 @@
 -(void)getGeoCoderInfo
 {
     //解析并获取当前坐标对应得地址信息
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          @"aaa", @"locality", @"bbb", @"thoroughfare",@"ccc", @"subLocality", nil];
-    NSError *error = NULL;
-    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:dict  error:&error];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",jsonString);
+//    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                          @"中文", @"locality", @"测试", @"thoroughfare",@"中文", @"subLocality", nil];
+//    NSError *error = NULL;
+//    NSData *jsonData = [[CJSONSerializer serializer] serializeObject:dict  error:&error];
+//    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF16StringEncoding];
+//    NSLog(@"%@",jsonString);
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
         [self locationAddressWithLocation:bestEffortAtLocation];
@@ -361,8 +362,16 @@
                                    placeMark.locality, @"locality", placeMark.thoroughfare, @"thoroughfare",placeMark.subLocality, @"subLocality", nil];
              NSError *error = NULL;
              NSData *jsonData = [[CJSONSerializer serializer] serializeObject:dict  error:&error];
-             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-             NSLog(@"%@",jsonString);           
+             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF16StringEncoding];
+  //           NSLog(@"%@",jsonString);
+             CLLocationCoordinate2D center = bestEffortAtLocation.coordinate;
+             int x = (int)(MAP_UNIT_SERVER(center.latitude));
+             int y = (int)(MAP_UNIT_SERVER(center.longitude));
+             NSString * regapiurl = [NSString stringWithFormat:REST_API_ONETAKE_PLACEMACK,x,y,jsonString];
+             WeiboConnection *webconn = [[WeiboConnection alloc] initWithTarget:self
+                                                                         action:@selector(processData:obj:)] ; 
+             [webconn asyncGet:regapiurl params:nil];   
+
          }
      }];
 }
